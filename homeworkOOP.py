@@ -40,18 +40,21 @@ class Student:
                 return f'За лекции по предмету "{course}" поставлена "{grade}"'
         else:
             return 'Ошибка'
+
+    def __eq__(self,other): #Магические методы сравнение среднего балла двух студентов
+        return self.ave_score() == other.ave_score()
+    def __ne__(self,other):
+        return self.ave_score() != other.ave_score()
+    def __it__(self,other):
+        return self.ave_score() < other.ave_score()
+    def __gt__(self,other):
+        return self.ave_score() > other.ave_score()
+    def __le__(self,other):
+        return self.ave_score() <= other.ave_score()
+    def __ge__(self,other):
+        return self.ave_score() >= other.ave_score()
         
-    def comparison(self,student):
-        """ Метод сравнение среднего балла двух студентов """
-        if isinstance(self, Student) and isinstance(student, Student):
-            if self.ave_score() > student.ave_score():
-                return f'Средний бал {self.name} выше. Он равен {self.ave_score()}'
-            elif self.ave_score() < student.ave_score():
-                return f'Средний бал {student.name} выше. Он равен {student.ave_score()}'
-            elif self.ave_score() == student.ave_score():
-                return f'Средний бал {self.name} и {student.name} равны.'
-        else :
-            return "Что то не так."
+
 class Mentor:
     """ Создает ментора """
     instances:list = []
@@ -86,17 +89,18 @@ class Lecturer(Mentor):
         score = sum_total / count
         return round(score,1)
     
-    def comparison(self,lecturer):
-        """ Метод сравнение среднего балла двух лекторов """
-        if isinstance(self, Lecturer) and isinstance(lecturer, Lecturer):
-            if self.ave_score() > lecturer.ave_score():
-                return f'Средний бал {self.name} выше. Он равен {self.ave_score()}'
-            elif self.ave_score() < lecturer.ave_score():
-                return f'Средний бал {lecturer.name} выше. Он равен {lecturer.ave_score()}'
-            elif self.ave_score() == lecturer.ave_score():
-                return f'Средний бал {self.name} и {lecturer.name} равны.'
-        else :
-            return "Что то не так."
+    def __eq__(self,other): #Магические методы сравнение среднего балла двух лекторов
+        return self.ave_score() == other.ave_score()
+    def __ne__(self,other):
+        return self.ave_score() != other.ave_score()
+    def __it__(self,other):
+        return self.ave_score() < other.ave_score()
+    def __gt__(self,other):
+        return self.ave_score() > other.ave_score()
+    def __le__(self,other):
+        return self.ave_score() <= other.ave_score()
+    def __ge__(self,other):
+        return self.ave_score() >= other.ave_score()
         
        
 class Reviewer(Mentor):
@@ -153,7 +157,11 @@ re1.rate_hw(st1,"OOP",[3,4,4,5])
 
 print(st1)
 
-print(st1.comparison(st2))
+print(st1 <= st2)
+print(st1 > st2)
+print(lt1 < lt2)
+print(lt1 == lt2)
+print(st1 != st2)
 
 def average_score_curse(classe, course):
     """ Функция подсчета ср. балла у всех представителей класса по выбронному курсу.
